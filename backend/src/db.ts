@@ -19,3 +19,11 @@ const ContentSchema = new Schema({
 })
 
 export const ContentModel = model("Content", ContentSchema); 
+
+const LinkSchema = new Schema({
+    hash:String,
+    userId:{type:mongoose.Types.ObjectId, ref:"User", require:true, unique:true}
+    
+})
+
+export const LinkModel = model("Links", LinkSchema); 
