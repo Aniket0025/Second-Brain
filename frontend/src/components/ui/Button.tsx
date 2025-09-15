@@ -10,7 +10,7 @@ interface ButtonInterface {
 
 const sizeStyles = {
     "lg":"px-8 py-4 text-xl rounded-xl",
-    "md":"px-4 py-2 text-md rounded-md",
+    "md":"px-4 py-2 text-base rounded-md",
     "sm":"px-2 py-1 text-sm rounded-sm",
 }
 
@@ -21,7 +21,7 @@ const variantStyles = {
 
 export function Button(props: ButtonInterface) {
     return (
-      <button className={sizeStyles[props.size]+"" + variantStyles[props.variant]}>
+      <button className={`${sizeStyles[props.size]} ${variantStyles[props.variant]}`}>
             {props.startIcon}
         <div className="pl-2 pr-2 flex">
                 {props.title}

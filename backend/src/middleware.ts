@@ -4,16 +4,22 @@ import jwt from "jsonwebtoken";
 import { JWT_PASSWORD } from "./config.js";
 
 export const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const header = req.headers['authorization'];   // fixed: req,headers → req.headers
+    const auth = req.headers["authorization"];   // e.g. "Bearer <token>"
 
-    const decoded = jwt.verify(header as string, JWT_PASSWORD);  // fixed type
+    if (!auth || typeof auth !== "string" || !auth.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "Missing or invalid Authorization header" });
+    }
 
-    if (decoded) {
-        (req as any).userId = (decoded as any).id;  // fixed access
+    const token = auth.slice(7);
+
+    try {
+        const decoded = jwt.verify(token, JWT_PASSWORD) as { id?: string };
+        if (!decoded || !decoded.id) {
+            return res.status(401).json({ message: "Invalid token" });
+        }
+        (req as any).userId = decoded.id;
         next();
-    } else {
-        res.status(403).json({
-            message: "you are not looged in"
-        });
+    } catch (e) {
+        return res.status(401).json({ message: "Invalid or expired token" });
     }
 };

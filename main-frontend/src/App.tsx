@@ -1,21 +1,11 @@
-import { useState } from 'react'
-import './App.css'
-import { Button } from './components/Button'
-import { PlusIcon } from './icons/PlusIcon'
-import { ShareIcon } from './icons/ShareIcon'
+import { Signin } from "./pages/Signin"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
+  return <Signin/>
 
-    
-      <Button variant='primary' text='add Content' startIcon={<PlusIcon/>}></Button>
-      <Button variant='secondary' text='Share Brain' startIcon={<ShareIcon/>}></Button>
-
-    </>
-  )
+  
 }
 
 export default App
