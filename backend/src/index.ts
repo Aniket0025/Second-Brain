@@ -4,10 +4,13 @@ import jwt from "jsonwebtoken";
 import { JWT_PASSWORD } from "./config.js";
 import { userMiddleware } from "./middleware.js";
 import { random } from "./utils.js";
+import cors from "cors";
 
 import { ContentModel, LinkModel, UserModel } from "./db.js";
 
 const app = express();
+app.use(cors());
+
 
 app.use(express.json());
 

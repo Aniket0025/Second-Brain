@@ -1,8 +1,15 @@
-import type { ChangeEvent } from "react";
 
-export function Input({ onChange, placeholder, type = "text" }: { placeholder: string; onChange?: (e: ChangeEvent<HTMLInputElement>) => void; type?: string }) {
+
+interface InputProps {
+    placeholder:string;
+    ref?:any
+}
+
+
+
+export function Input({  placeholder, ref}: InputProps) {
     return <div>
-        <input placeholder={placeholder} type={type} className="px-4 py-2 border rounded m-2 w-full" onChange={onChange} />
+        <input ref={ref} placeholder={placeholder}  className="px-4 py-2 border rounded m-2 w-full"  />
     </div>
 }
 
